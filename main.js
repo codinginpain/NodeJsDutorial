@@ -1,10 +1,12 @@
 var http = require('http');
 var fs = require('fs');
+
 var url = require('url');
 
 var app = http.createServer(function(request,response){
     var _url = request.url;
     var queryData = url.parse(_url, true).query;
+
     var title = queryData.id;
     if(_url == '/'){
       title = 'Welcome';
@@ -15,6 +17,7 @@ var app = http.createServer(function(request,response){
       return;
     }
     response.writeHead(200);
+
 
 
     console.log("template 파일 회사꺼에서 확인후 커밋 해서 일로 넘길 수 있으면 넘김 없으면 안넘겨도 됨");
