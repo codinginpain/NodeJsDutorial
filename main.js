@@ -55,7 +55,12 @@ var app = http.createServer(function(request,response){
             var list = templateList(filelist);
             var template = templateHTML(title, list, 
               `<h2>${title}</h2>${description}`,
-              `<a href="/create">create</a> <a href="/update?id=${title}">update</a>`
+              ` <a href="/create">create</a> 
+                <a href="/update?id=${title}">update</a>
+                <form action="delete_process" method="post">
+                  <input type="hidden" name="id" value="${title}">
+                  <input type="submit" value="delete">
+                </form>`
             );
             response.writeHead(200);
             response.end(template);
@@ -136,7 +141,21 @@ var app = http.createServer(function(request,response){
         });
       });
 
-    }else {
+    } else if(pathname === '/delete_process') {
+      var body = '';
+      request.on('data', function(data) { //data로 들어와서 body에 계속 추가함 추후에 정보가 많아지면(특정 기준 초과) 연결을 끊어줌
+        body += data;
+      });
+      request.on('end', function() {
+        var post = qs.parse(body); //querystring.parse(); 객체화
+        var id = post.id;
+        fs.unlink(`data/${id}`, function(error) {
+          response.writeHead(302, {Location : `/`});
+          response.end();
+        });
+      });
+
+    } else {
       response.writeHead(404);
       response.end('Not found');
     }
