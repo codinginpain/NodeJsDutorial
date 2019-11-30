@@ -28,6 +28,13 @@ function templateList(filelist){
     i = i + 1;
   }
   list = list+'</ul>';
+  console.log("하오");
+  console.log("하오");
+  console.log("하오");
+  console.log("하오");
+  console.log("하오");
+  console.log("하오");
+  console.log("하오");
   return list;
 }
  
