@@ -13,7 +13,8 @@ var roles = {
     'manager' : 'hoya'
 }
 
-console.log(roles.designer); //k8805
+console.log(roles.designer); //k8805 키 값을 적어서
+console.log(roles['designer']); //k8805 키 값을 배열처럼 적어서도 사용 가능
 
 for(var name in roles) {
     console.log('object =>', name, 'value =>', roles[name]);
